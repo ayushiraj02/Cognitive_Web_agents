@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home - AI Bot Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0f2027;  /* fallback */
+      background: linear-gradient(135deg, #1f1c2c, #928DAB);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .card-3d {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+      padding: 50px;
+      max-width: 600px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 60px rgba(0,0,0,0.5);
+      z-index: 1;
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+      transition: transform 0.8s ease, box-shadow 0.8s ease;
+    }
+
+    .card-3d:hover {
+      transform: rotateY(8deg) rotateX(8deg);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 10px #00c6ff, 0 0 20px #00c6ff;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 35px;
+    }
+
+    .btn-glow {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 50px;
+      padding: 15px 40px;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 6px 30px rgba(0, 198, 255, 0.6);
+      transition: all 0.4s ease;
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, #0072ff, #00c6ff);
+      box-shadow: 0 12px 50px rgba(0, 114, 255, 0.8);
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="card-3d">
+    <h1>AI Bot Hub</h1>
+    <p>Your personal AI-powered assistant platform — interact, automate, and innovate using intelligent chatbots tailored for your needs. Dive in now and experience smart conversations made simple.</p>
+    <a href="/login" class="btn btn-glow">TRY NOW</a>
+  </div>
+
+  <script>
+    // Floating particles background
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+    let particlesArray;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Particle class
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedX = (Math.random() * 0.5) - 0.25;
+        this.speedY = (Math.random() * 0.5) - 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = '#00c6ff';
+        ctx.shadowColor = '#00c6ff';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+      }
+    }
+
+    // Create particle array
+    function init() {
+      particlesArray = [];
+      let numberOfParticles = (canvas.width * canvas.height) / 9000;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    // Animate particles
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+  </script>
+
+</body>
+</html>
