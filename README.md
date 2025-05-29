@@ -1,8 +1,6 @@
-## **Cognitive Web Agent 🤖🌐**
-# Note:-
-# The current version is working as expected, which is great! However, we’re noticing some delays in response times and would like to optimize performance further.
-
-### If you have any suggestions—whether it's architectural improvements, model configuration tips, or better ways to handle vector retrieval and LLM calls—please feel free to share. We're open to refining any part of the pipeline to enhance responsiveness and user experience.
+# **Cognitive Web Agent 🤖🌐**
+### Note:- The current version is working as expected, which is great! However, we’re noticing some delays in response times and would like to optimize performance further.
+If you have any suggestions—whether it's architectural improvements, model configuration tips, or better ways to handle vector retrieval and LLM calls—please feel free to share. We're open to refining any part of the pipeline to enhance responsiveness and user experience.
 
 ### Looking forward to your ideas and input!
 
